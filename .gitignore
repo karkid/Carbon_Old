@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Folder
+bin/
+bin-int/
+
+# Project File
+*.vcxproj
+*.sln
+.vs/
+Carbon/Carbon.vcxproj.filters
