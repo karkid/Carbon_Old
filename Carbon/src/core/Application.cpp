@@ -13,6 +13,7 @@ namespace Carbon {
 
     void Application::run()
     {
+        LOG_INFO("Engine Start");
         while (true);
     }
 }
