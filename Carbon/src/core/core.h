@@ -15,3 +15,11 @@
 #else
     #define CARBON_API
 #endif
+
+#define Bit(x) 1 << x
+
+#define NON_COPYABLE_CLASS(className) \
+    className(const className& rhs) = delete; \
+    className& operator=(const className& rhs) = delete; \
+    className(className&& rhs) = delete; \
+    className& operator=(className&& rhs) = delete;

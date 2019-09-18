@@ -1,5 +1,6 @@
 #include "capch.h"
 #include "Application.h"
+#include "events/ApplicationEvent.h"
 
 namespace Carbon {
 
@@ -13,7 +14,8 @@ namespace Carbon {
 
     void Application::run()
     {
-        LOG_INFO("Engine Start");
+        AppLoadEvent appLoad;
+        LOG_INFO("%s", appLoad.toString().c_str());
         while (true);
     }
 }
