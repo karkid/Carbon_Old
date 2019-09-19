@@ -18,6 +18,8 @@
 
 #define Bit(x) 1 << x
 
+#define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
 #define NON_COPYABLE_CLASS(className) \
     className(const className& rhs) = delete; \
     className& operator=(const className& rhs) = delete; \

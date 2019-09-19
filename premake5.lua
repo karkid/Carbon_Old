@@ -8,6 +8,13 @@ workspace "Carbon"
     startproject "Sandbox"
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
     
+    -- Include directories relative to solution directory
+    IncludeDir = {}
+    IncludeDir["GLFW"] = "Carbon/vendors/glfw/include"
+    
+    -- Include premake file of submodule
+    include "Carbon/vendors/glfw"
+    
     -- Include Carbon project
     project "Carbon"
         location "Carbon"
@@ -25,6 +32,11 @@ workspace "Carbon"
         }
         includedirs {
             "%{prj.name}/src/",
+            "%{IncludeDir.GLFW}",
+        }
+        links
+        {
+            "GLFW"
         }
         
         -- Configuration specific settings for all system
@@ -55,6 +67,7 @@ workspace "Carbon"
             {
                 "CA_PLATFORM_WINDOWS",
                 "CA_BUILD_DLL",
+                "GLFW_INCLUDE_NONE",
             }
 
         -- XCode IDE specific setting for MAC system
@@ -66,6 +79,7 @@ workspace "Carbon"
             {
                 "CA_PLATFORM_MAC",
                 "CA_BUILD_LIB",
+                "GLFW_INCLUDE_NONE",
             }
     -- End Carbon project
     

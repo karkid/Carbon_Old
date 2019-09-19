@@ -3,6 +3,7 @@
 #include "Event.h"
 
 namespace Carbon {
+
     class CARBON_API EventDispatcher
     {
         NON_COPYABLE_CLASS(EventDispatcher)

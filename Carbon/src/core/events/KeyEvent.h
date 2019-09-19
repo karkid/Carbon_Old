@@ -7,7 +7,7 @@ namespace Carbon
     class CARBON_API KeyEvent : public Event
     {
     public:
-        DEFINE_EVENT_CATEGORY(EventCategory::Input | EventCategory::Keyboard)
+        DEFINE_EVENT_CATEGORY(EventCategory::eInput | EventCategory::eKeyboard)
         virtual ~KeyEvent() = default;
         inline int keyCode() const { return this->m_KeyCode;  }
     protected:

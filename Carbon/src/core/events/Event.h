@@ -20,12 +20,12 @@ namespace Carbon
 
     enum EventCategory
     {
-        None        = 0,
-        App         = Bit(0),
-        Window      = Bit(1),
-        Input       = Bit(2),
-        Keyboard    = Bit(3),
-        Mouse       = Bit(4),
+        eNone        = 0,
+        eApplication = Bit(0),
+        eWindow      = Bit(1),
+        eInput       = Bit(2),
+        eKeyboard    = Bit(3),
+        eMouse       = Bit(4),
     };
 
     #define DEFINE_EVENT_CATEGORY(evtCategory) int category() const override { return evtCategory; }

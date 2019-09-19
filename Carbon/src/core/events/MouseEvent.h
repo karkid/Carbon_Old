@@ -7,7 +7,7 @@ namespace Carbon
     class CARBON_API MouseEvent : public Event
     {
     public:
-        DEFINE_EVENT_CATEGORY(EventCategory::Input | EventCategory::Mouse)
+        DEFINE_EVENT_CATEGORY(EventCategory::eInput | EventCategory::eMouse)
         virtual ~MouseEvent() = default;
         int clientX() const { return m_ClientX; }
         int clientY() const { return m_ClientY; }
@@ -41,10 +41,10 @@ namespace Carbon
     class CARBON_API MouseWheelEvent : public Event
     {
     public:
-        DEFINE_EVENT(EventType::MouseWheel, EventCategory::Input | EventCategory::Mouse)
-        MouseWheelEvent(int xOffset, int yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
-        int xOffset() const { return m_XOffset; }
-        int yOffset() const { return m_YOffset; }
+        DEFINE_EVENT(EventType::MouseWheel, EventCategory::eInput | EventCategory::eMouse)
+        MouseWheelEvent(double xOffset, double yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
+        double xOffset() const { return m_XOffset; }
+        double yOffset() const { return m_YOffset; }
 
         std::string toString() const override
         {
@@ -53,21 +53,21 @@ namespace Carbon
             return ss.str();
         }
     private:
-        int m_XOffset, m_YOffset;
+        double m_XOffset, m_YOffset;
     };
 
 
     class CARBON_API MouseContextMenuEvent : public Event
     {
     public:
-        DEFINE_EVENT(EventType::MouseContextMenu, EventCategory::Input | EventCategory::Mouse)
+        DEFINE_EVENT(EventType::MouseContextMenu, EventCategory::eInput | EventCategory::eMouse)
         MouseContextMenuEvent() = default;
     };
 
     class CARBON_API MouseButtonEvent : public Event
     {
     public:
-        DEFINE_EVENT_CATEGORY(EventCategory::Input | EventCategory::Mouse)
+        DEFINE_EVENT_CATEGORY(EventCategory::eInput | EventCategory::eMouse)
         virtual ~MouseButtonEvent() = default;
         int button() const { return m_Button; }
         std::string toString() const override
