@@ -1,8 +1,8 @@
 #pragma once
 
 #include "capch.h"
-#include "core.h"
-#include "events/Event.h"
+#include "core/core.h"
+#include "core/events/Event.h"
 
 namespace Carbon 
 {
@@ -32,7 +32,6 @@ namespace Carbon
         virtual bool isVSync() const = 0;
 
         virtual void* nativeWindow() = 0;
-        virtual void  clearWindow() = 0;
 
         static Window* Create(const WindowProps& props = WindowProps());
     protected:

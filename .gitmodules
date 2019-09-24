@@ -1,3 +1,9 @@
 [submodule "Carbon/vendors/glfw"]
 	path = Carbon/vendors/glfw
 	url = https://github.com/karkid/glfw
+[submodule "Carbon/vendors/glm"]
+	path = Carbon/vendors/glm
+	url = https://github.com/g-truc/glm
+[submodule "Carbon/vendors/glad"]
+	path = Carbon/vendors/glad
+	url = https://github.com/karkid/glad.git

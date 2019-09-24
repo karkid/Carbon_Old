@@ -5,23 +5,30 @@ workspace "Carbon"
         "Release", 
         "Dist" 
     }
+    flags
+    {
+        "MultiProcessorCompile"
+    }
     startproject "Sandbox"
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
     
     -- Include directories relative to solution directory
     IncludeDir = {}
     IncludeDir["GLFW"] = "Carbon/vendors/glfw/include"
+    IncludeDir["GLAD"] = "Carbon/vendors/glad/include"
+    IncludeDir["GLM"] = "Carbon/vendors/glm/"
     
     -- Include premake file of submodule
     include "Carbon/vendors/glfw"
+    include "Carbon/vendors/glad"
     
     -- Include Carbon project
     project "Carbon"
         location "Carbon"
-        kind "SharedLib"
+        kind "StaticLib"
         language "C++"
         cppdialect "C++17"
-        staticruntime "off"
+        staticruntime "on"
         systemversion "latest"      
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -29,21 +36,30 @@ workspace "Carbon"
         files {
             "%{prj.name}/src/**.h",
             "%{prj.name}/src/**.cpp",
+            "%{prj.name}/vendor/glm/glm/**.hpp",
+            "%{prj.name}/vendor/glm/glm/**.inl"
+        }
+        defines
+        {
+            "_CRT_SECURE_NO_WARNINGS"
         }
         includedirs {
             "%{prj.name}/src/",
             "%{IncludeDir.GLFW}",
+            "%{IncludeDir.GLAD}",
+            "%{IncludeDir.GLM}"
         }
         links
         {
-            "GLFW"
+            "GLFW",
+            "Glad",
         }
         
         -- Configuration specific settings for all system
         filter "configurations:*"
             postbuildcommands {
-                {"{MKDIR} ../bin/" .. outputdir .. "/Sandbox"},
-                {"{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"}
+                --{"{MKDIR} ../bin/" .. outputdir .. "/Sandbox"},
+                --{"{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"}
             }
         filter "configurations:Debug"
             defines "CA_DEBUG"
@@ -69,6 +85,7 @@ workspace "Carbon"
                 "CA_BUILD_DLL",
                 "GLFW_INCLUDE_NONE",
             }
+            links { "opengl32.lib" }
 
         -- XCode IDE specific setting for MAC system
         filter "system:macosx"
@@ -81,6 +98,15 @@ workspace "Carbon"
                 "CA_BUILD_LIB",
                 "GLFW_INCLUDE_NONE",
             }
+            links { "pthread" }
+            linkoptions
+            {
+                "-framework Cocoa",
+                "-framework IOKit",
+                "-framework CoreFoundation",
+                "-framework CoreVideo",
+                "-framework OpenGL"
+            }
     -- End Carbon project
     
     -- Include Sandbox project
@@ -89,7 +115,7 @@ workspace "Carbon"
         kind "ConsoleApp"
         language "C++"
         cppdialect "C++17"
-        staticruntime "off"
+        staticruntime "on"
         systemversion "latest"
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")

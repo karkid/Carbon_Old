@@ -1,11 +1,4 @@
-#include "Carbon.h"
-
-class SandboxApp : public Carbon::Application
-{
-public:
-    SandboxApp(){}
-    ~SandboxApp() {}
-};
+#include "SandboxApp.h"
 
 Carbon::Application* Carbon::CreateApplication() {
     return new SandboxApp();
